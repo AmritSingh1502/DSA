@@ -112,6 +112,50 @@ int lexRank(string str){
 
 }
 
+// 05.Given a text string  and a pattern string , find if a permutation of its pattern exists in the text.
+// input: txt(n):"geeksforgeeks" pat(m): "egek" outptut: yes
+// input: txt: "geeksforgeeks" pat: ""
+//O((n-m) * m)
+
+    bool areSame(int s1[], int s2[]){
+        for( int i = 0; i<256;i++){
+            if(s1[i] != s1[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+bool isAnagramPresent(string txt , string pat){
+    int countTxtW[256]={0}, countPat[256] = {0};
+
+    for( int i = 0; i<pat.length();i++){
+        countTxtW[txt[i]]++;
+        countPat[pat[i]]++;
+    }
+
+    for( int i = pat.length(); i<txt.length();i++){
+        if(areSame(countTxtW,countPat)) return true;
+        countTxtW[txt[i]]++;
+        countTxtW[txt[i-pat.length()]]--;
+    }
+
+    return false;
+}
+
+
+//06. Given two strings. Check if they are rotations of each other
+// input s1: "ABCD s2:"CDAB" output: true;
+
+bool areRotations(string s1 , string s2){
+    if(s1.length() != s2.length()) return false;
+
+    s1 = s1+s1; 
+
+    return (s1.find(s2) != string::npos);
+}
+
     
 
 
